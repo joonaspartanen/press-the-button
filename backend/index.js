@@ -7,6 +7,10 @@ let nextPrize = 10
 
 let players = []
 
+const findPlayer = id => {
+  return players.find(p => p.id === id)
+}
+
 io.on('connection', socket => {
   console.log('user connected')
 
@@ -20,7 +24,7 @@ io.on('connection', socket => {
 
   socket.on('click', () => {
     counter = counter + 1
-    const player = players.find(p => p.id === socket.id)
+    const player = findPlayer(socket.id)
     console.log(`player ${player.id} clicked the button`)
     console.log(`the counter is ${counter}`)
     let newScore = -1
@@ -39,6 +43,10 @@ io.on('connection', socket => {
       io.to(player.id).emit('win', newScore + 1)
     } else {
       io.to(player.id).emit('noWin', nextPrize - counter)
+      if (player.score === 1) {
+        console.log('you lose')
+        io.to(player.id).emit('lostGame')
+      }
     }
 
     players = players.map(p =>
@@ -46,6 +54,22 @@ io.on('connection', socket => {
     )
 
     console.log(`${nextPrize - counter} clicks to the next prize`)
+    io.sockets.emit('gameState', {
+      players: players,
+      toNextPrize: nextPrize - counter
+    })
+  })
+
+  socket.on('playAgain', () => {
+    players = players.map(p => (p.id !== socket.id ? p : { ...p, score: 20 }))
+    io.sockets.emit('gameState', {
+      players: players,
+      toNextPrize: nextPrize - counter
+    })
+  })
+
+  socket.on('leaveGame', () => {
+    players = players.filter(p => p.id !== socket.id)
     io.sockets.emit('gameState', {
       players: players,
       toNextPrize: nextPrize - counter

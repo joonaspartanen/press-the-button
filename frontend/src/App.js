@@ -14,11 +14,16 @@ const App = () => {
   const [score, setScore] = useState(0)
   const [notification, setNotification] = useState('')
   const [user, setUser] = useState('')
+  const [lostGame, setLostGame] = useState(false)
 
   useEffect(() => {
     socket.on('gameState', data => {
       console.log(data)
       setPlayers(data.players)
+      console.log(lostGame)
+    })
+    socket.on('lostGame', () => {
+      setLostGame(true)
     })
     socket.on('win', score => {
       setNotification(`You win ${score} points!`)
@@ -33,12 +38,18 @@ const App = () => {
         setNotification('')
       }, 2000)
     })
-  }, [players, score])
+  }, [players, score, lostGame])
 
   return (
     <div>
       {user ? (
-        <GameView notification={notification} players={players}></GameView>
+        <GameView
+          notification={notification}
+          players={players}
+          lostGame={lostGame}
+          setLostGame={setLostGame}
+          setUser={setUser}
+        ></GameView>
       ) : (
         <NameForm setUser={setUser}></NameForm>
       )}
@@ -46,7 +57,32 @@ const App = () => {
   )
 }
 
-const GameView = ({ notification, players }) => {
+const GameView = ({
+  notification,
+  players,
+  lostGame,
+  setLostGame,
+  setUser
+}) => {
+  const playAgain = () => {
+    socket.emit('playAgain')
+    setLostGame(false)
+  }
+
+  const leaveGame = () => {
+    socket.emit('leaveGame')
+    setUser('')
+  }
+
+  if (lostGame) {
+    return (
+      <div>
+        <div>You lose!</div>
+        <button onClick={playAgain}>Yes</button>
+        <button onClick={leaveGame}>No</button>
+      </div>
+    )
+  }
   return (
     <div>
       <h1> Press the Button! </h1>{' '}
