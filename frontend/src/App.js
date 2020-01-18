@@ -13,6 +13,7 @@ const App = () => {
   const [players, setPlayers] = useState([])
   const [score, setScore] = useState(0)
   const [notification, setNotification] = useState('')
+  const [user, setUser] = useState('')
 
   useEffect(() => {
     socket.on('gameState', data => {
@@ -36,11 +37,22 @@ const App = () => {
 
   return (
     <div>
+      {user ? (
+        <GameView notification={notification} players={players}></GameView>
+      ) : (
+        <NameForm setUser={setUser}></NameForm>
+      )}
+    </div>
+  )
+}
+
+const GameView = ({ notification, players }) => {
+  return (
+    <div>
       <h1> Press the Button! </h1>{' '}
       <Notification notification={notification}></Notification>
       <button onClick={handleClick}> Press </button>
       {players !== null && <PlayerList players={players}></PlayerList>}
-      <NameForm></NameForm>
     </div>
   )
 }
@@ -61,7 +73,7 @@ const Notification = ({ notification }) => {
   return <div>{notification}</div>
 }
 
-const NameForm = () => {
+const NameForm = ({ setUser }) => {
   const [name, setName] = useState('')
 
   const handleNameChange = event => {
@@ -70,10 +82,9 @@ const NameForm = () => {
   }
 
   const enterGame = event => {
-    console.log('???')
     event.preventDefault()
-    console.log('new player')
     socket.emit('newPlayer', name)
+    setUser(name)
   }
 
   return (
