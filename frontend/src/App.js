@@ -10,34 +10,37 @@ const handleClick = () => {
 }
 
 const App = () => {
-  const [counter, setCounter] = useState(0)
   const [players, setPlayers] = useState([])
   const [score, setScore] = useState(0)
+  const [notification, setNotification] = useState('')
 
   useEffect(() => {
-    socket.emit('newPlayer')
-  }, [])
-
-  useEffect(() => {
-    socket.on('players', data => {
-      setPlayers(data)
+    socket.on('gameState', data => {
+      console.log(data)
+      setPlayers(data.players)
     })
     socket.on('win', score => {
-      setScore(score)
+      setNotification(`You win ${score} points!`)
       console.log(`new score ${score}`)
       setTimeout(() => {
-        setScore(0)
+        setNotification('')
       }, 2000)
-
     })
-  }, [counter, players, score])
+    socket.on('noWin', toNextPrize => {
+      setNotification(`The next prize is ${toNextPrize} clicks away!`)
+      setTimeout(() => {
+        setNotification('')
+      }, 2000)
+    })
+  }, [players, score])
 
   return (
     <div>
       <h1> Press the Button! </h1>{' '}
-      <WinNotification score={score}></WinNotification>
+      <Notification notification={notification}></Notification>
       <button onClick={handleClick}> Press </button>
-      {players.length !== 0 && <PlayerList players={players}></PlayerList>}
+      {players !== null && <PlayerList players={players}></PlayerList>}
+      <NameForm></NameForm>
     </div>
   )
 }
@@ -46,20 +49,38 @@ const PlayerList = ({ players }) =>
   players.map(p => {
     return (
       <p key={p.id}>
-        {p.id} has {p.score} points
+        {p.name} has {p.score} points
       </p>
     )
   })
 
-const WinNotification = ({ score }) => {
-  if (score === 0) {
+const Notification = ({ notification }) => {
+  if (notification === '') {
     return null
+  }
+  return <div>{notification}</div>
+}
+
+const NameForm = () => {
+  const [name, setName] = useState('')
+
+  const handleNameChange = event => {
+    setName(event.target.value)
+    console.log(name)
+  }
+
+  const enterGame = event => {
+    console.log('???')
+    event.preventDefault()
+    console.log('new player')
+    socket.emit('newPlayer', name)
   }
 
   return (
-    <div>
-      You got {score} points!
-    </div>
+    <form onSubmit={enterGame}>
+      <input value={name} onChange={handleNameChange} required></input>
+      <button type="submit">Play</button>
+    </form>
   )
 }
 
