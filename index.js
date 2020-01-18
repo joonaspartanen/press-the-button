@@ -3,37 +3,62 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
 let counter = 0
+let nextPrize = 10
 
 let players = []
 
 io.on('connection', socket => {
   console.log('user connected')
-  console.log(socket.id)
-  players.push({ id: socket.id, score: 20 })
-  console.log(players)
-  io.sockets.emit('players', players)
+
+  socket.on('newPlayer', name => {
+    players.push({ name: name, id: socket.id, score: 20 })
+    io.sockets.emit('gameState', {
+      players: players,
+      toNextPrize: nextPrize - counter
+    })
+  })
 
   socket.on('click', () => {
     counter = counter + 1
     const player = players.find(p => p.id === socket.id)
     console.log(`player ${player.id} clicked the button`)
+    console.log(`the counter is ${counter}`)
     let newScore = -1
-    if (counter % 10 === 0) {
-      newScore = newScore + 5
+
+    if (counter % 500 === 0) {
+      newScore = newScore + 250
+      nextPrize = nextPrize + 10
       io.to(player.id).emit('win', newScore + 1)
+    } else if (counter % 100 === 0) {
+      newScore = newScore + 40
+      nextPrize = nextPrize + 10
+      io.to(player.id).emit('win', newScore + 1)
+    } else if (counter % 10 === 0) {
+      newScore = newScore + 5
+      nextPrize = nextPrize + 10
+      io.to(player.id).emit('win', newScore + 1)
+    } else {
+      io.to(player.id).emit('noWin', nextPrize - counter)
     }
 
     players = players.map(p =>
       p.id !== player.id ? p : { ...p, score: p.score + newScore }
     )
-    console.log(players)
-    console.log(`counter now: ${counter}`)
-    io.sockets.emit('players', players)
+
+    console.log(`${nextPrize - counter} clicks to the next prize`)
+    io.sockets.emit('gameState', {
+      players: players,
+      toNextPrize: nextPrize - counter
+    })
   })
 
-  socket.on('disconnect', reason => {
+  socket.on('disconnect', () => {
     console.log('user disconnected')
     players = players.filter(p => p.id !== socket.id)
+    io.sockets.emit('gameState', {
+      players: players,
+      toNextPrize: nextPrize - counter
+    })
   })
 })
 
