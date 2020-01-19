@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Navbar, Nav, Row, Col, Button } from 'react-bootstrap'
-import { ForwardFill } from 'react-bootstrap-icons'
+import './App.css'
 
 import io from 'socket.io-client'
 const socket = io('http://localhost:5000')
@@ -48,12 +48,19 @@ const App = () => {
         style={{
           paddingLeft: 0,
           paddingRight: 0,
-          backgroundColor: '#009688',
+          backgroundColor: '#f5f8fa',
           height: '100vh'
         }}
       >
-        <Navbar variant="dark">
+        <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="#">Press the Button</Navbar.Brand>
+          <Nav>
+            <Nav.Item>
+              <Nav.Link href="https://github.com/joonaspartanen/press-the-button">
+                About
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
         </Navbar>
         {user ? (
           <GameView
@@ -100,30 +107,35 @@ const GameView = ({
   return (
     <Container>
       <Row className="justify-content-center">
-        <h1 style={{ color: '#FFF' }}>Press the Button!</h1>
+        <h1 style={{ color: '#000', marginTop: '1em' }}>Press the Button!</h1>
       </Row>
       <Row
-        className="justify-content-center align-items-center"
-        style={{ height: '50vh' }}
+        className="justify-content-center"
+        style={{ height: '30vh', paddingTop: '2em' }}
       >
-        <Col className="text-center">
-          {players !== null && <PlayerList players={players}></PlayerList>}
+        <Col className="">
+          {players !== null && (
+            <ul className="list-unstyled">
+              <h3>Current players</h3>
+              <PlayerList players={players}></PlayerList>
+            </ul>
+          )}
         </Col>
         <Col className="text-center">
-          <Button
+          <button
+            class="game-btn"
             onClick={handleClick}
-            size="lg"
             style={{
-              backgroundColor: '#FFF',
-              color: '#009688',
+              backgroundColor: '#02bd7e',
+              color: '#fff',
               border: '0px',
               borderRadius: '50%',
               height: '10em',
               width: '10em'
             }}
           >
-            Press
-          </Button>
+            Press!
+          </button>
         </Col>
         <Col className="text-center">
           <Notification notification={notification}></Notification>
@@ -136,9 +148,9 @@ const GameView = ({
 const PlayerList = ({ players }) =>
   players.map(p => {
     return (
-      <p key={p.id}>
+      <li key={p.id} style={{ color: '#000' }}>
         {p.name} has {p.score} points
-      </p>
+      </li>
     )
   })
 
@@ -166,11 +178,11 @@ const NameForm = ({ setUser }) => {
   return (
     <Container>
       <Row className="justify-content-center">
-        <h2 style={{ color: '#FFF' }}>What's your name?</h2>
+        <h2 style={{ color: '#000', marginTop: '2em' }}>What's your name?</h2>
       </Row>
       <Row
         className="justify-content-center align-items-center"
-        style={{ height: '50vh' }}
+        style={{ height: '30vh' }}
       >
         <form onSubmit={enterGame}>
           <input value={name} onChange={handleNameChange} required></input>
