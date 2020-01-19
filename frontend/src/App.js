@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { Container, Navbar, Nav, Row, Col, Button } from 'react-bootstrap'
+import { ForwardFill } from 'react-bootstrap-icons'
+
 import io from 'socket.io-client'
 const socket = io('http://localhost:5000')
 
@@ -42,17 +43,30 @@ const App = () => {
 
   return (
     <div>
-      {user ? (
-        <GameView
-          notification={notification}
-          players={players}
-          lostGame={lostGame}
-          setLostGame={setLostGame}
-          setUser={setUser}
-        ></GameView>
-      ) : (
-        <NameForm setUser={setUser}></NameForm>
-      )}
+      <Container
+        fluid={'true'}
+        style={{
+          paddingLeft: 0,
+          paddingRight: 0,
+          backgroundColor: '#009688',
+          height: '100vh'
+        }}
+      >
+        <Navbar variant="dark">
+          <Navbar.Brand href="#">Press the Button</Navbar.Brand>
+        </Navbar>
+        {user ? (
+          <GameView
+            notification={notification}
+            players={players}
+            lostGame={lostGame}
+            setLostGame={setLostGame}
+            setUser={setUser}
+          ></GameView>
+        ) : (
+          <NameForm setUser={setUser}></NameForm>
+        )}
+      </Container>
     </div>
   )
 }
@@ -84,12 +98,38 @@ const GameView = ({
     )
   }
   return (
-    <div>
-      <h1> Press the Button! </h1>{' '}
-      <Notification notification={notification}></Notification>
-      <button onClick={handleClick}> Press </button>
-      {players !== null && <PlayerList players={players}></PlayerList>}
-    </div>
+    <Container>
+      <Row className="justify-content-center">
+        <h1 style={{ color: '#FFF' }}>Press the Button!</h1>
+      </Row>
+      <Row
+        className="justify-content-center align-items-center"
+        style={{ height: '50vh' }}
+      >
+        <Col className="text-center">
+          {players !== null && <PlayerList players={players}></PlayerList>}
+        </Col>
+        <Col className="text-center">
+          <Button
+            onClick={handleClick}
+            size="lg"
+            style={{
+              backgroundColor: '#FFF',
+              color: '#009688',
+              border: '0px',
+              borderRadius: '50%',
+              height: '10em',
+              width: '10em'
+            }}
+          >
+            Press
+          </Button>
+        </Col>
+        <Col className="text-center">
+          <Notification notification={notification}></Notification>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
@@ -124,10 +164,20 @@ const NameForm = ({ setUser }) => {
   }
 
   return (
-    <form onSubmit={enterGame}>
-      <input value={name} onChange={handleNameChange} required></input>
-      <button type="submit">Play</button>
-    </form>
+    <Container>
+      <Row className="justify-content-center">
+        <h2 style={{ color: '#FFF' }}>What's your name?</h2>
+      </Row>
+      <Row
+        className="justify-content-center align-items-center"
+        style={{ height: '50vh' }}
+      >
+        <form onSubmit={enterGame}>
+          <input value={name} onChange={handleNameChange} required></input>
+          <button type="submit">Play</button>
+        </form>
+      </Row>
+    </Container>
   )
 }
 
