@@ -6,7 +6,20 @@
   color: red;
 }
 
+.game-btn {
+  background-color: #02bd7e;
+  color: #fff;
+  border: 0px;
+  border-radius: 50%;
+  height: 10em;
+  width: 10em;
+}
+
 .game-btn:focus {
   outline: 0;
   box-shadow: none !important;
+}
+
+.game-btn:active {
+  background-color: #198a64;
 }

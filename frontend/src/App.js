@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Navbar, Nav, Row, Col, Button } from 'react-bootstrap'
+import { Hammer } from 'react-bootstrap-icons'
 import './App.css'
 
 import io from 'socket.io-client'
@@ -12,7 +13,6 @@ const handleClick = () => {
 
 const App = () => {
   const [players, setPlayers] = useState([])
-  const [score, setScore] = useState(0)
   const [notification, setNotification] = useState('')
   const [user, setUser] = useState('')
   const [lostGame, setLostGame] = useState(false)
@@ -26,9 +26,9 @@ const App = () => {
     socket.on('lostGame', () => {
       setLostGame(true)
     })
-    socket.on('win', score => {
-      setNotification(`You win ${score} points!`)
-      console.log(`new score ${score}`)
+    socket.on('win', prize => {
+      setNotification(`You win ${prize} points!`)
+      console.log(`new score ${prize}`)
       setTimeout(() => {
         setNotification('')
       }, 2000)
@@ -39,7 +39,7 @@ const App = () => {
         setNotification('')
       }, 2000)
     })
-  }, [players, score, lostGame])
+  }, [players, lostGame])
 
   return (
     <div>
@@ -97,23 +97,26 @@ const GameView = ({
 
   if (lostGame) {
     return (
-      <div>
-        <div>You lose!</div>
-        <button onClick={playAgain}>Yes</button>
-        <button onClick={leaveGame}>No</button>
-      </div>
+      <Container fluid={'true'}>
+        <h1 style={{ textAlign: 'center' }}>You lose!</h1>
+        <h2 style={{ textAlign: 'center' }}>Do you want to play again?</h2>
+        <Row className="justify-content-center">
+          <button onClick={playAgain}>Yes</button>
+          <button onClick={leaveGame}>No</button>
+        </Row>
+      </Container>
     )
   }
   return (
-    <Container>
-      <Row className="justify-content-center">
-        <h1 style={{ color: '#000', marginTop: '1em' }}>Press the Button!</h1>
-      </Row>
+    <Container fluid={'true'}>
+      <h1 style={{ color: '#000', marginTop: '1em', textAlign: 'center' }}>
+        Press the Button!
+      </h1>
       <Row
         className="justify-content-center"
         style={{ height: '30vh', paddingTop: '2em' }}
       >
-        <Col className="">
+        <Col className="text-center">
           {players !== null && (
             <ul className="list-unstyled">
               <h3>Current players</h3>
@@ -122,19 +125,8 @@ const GameView = ({
           )}
         </Col>
         <Col className="text-center">
-          <button
-            class="game-btn"
-            onClick={handleClick}
-            style={{
-              backgroundColor: '#02bd7e',
-              color: '#fff',
-              border: '0px',
-              borderRadius: '50%',
-              height: '10em',
-              width: '10em'
-            }}
-          >
-            Press!
+          <button className="game-btn" onClick={handleClick}>
+            <Hammer size={'6em'}></Hammer>
           </button>
         </Col>
         <Col className="text-center">
@@ -185,7 +177,12 @@ const NameForm = ({ setUser }) => {
         style={{ height: '30vh' }}
       >
         <form onSubmit={enterGame}>
-          <input value={name} onChange={handleNameChange} required></input>
+          <input
+            value={name}
+            onChange={handleNameChange}
+            required
+            autoFocus
+          ></input>
           <button type="submit">Play</button>
         </form>
       </Row>
