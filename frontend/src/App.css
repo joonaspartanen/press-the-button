@@ -13,6 +13,7 @@
   border-radius: 50%;
   height: 10em;
   width: 10em;
+  margin: 0em 0em 2em 0em
 }
 
 .game-btn:focus {
@@ -22,4 +23,14 @@
 
 .game-btn:active {
   background-color: #198a64;
+}
+
+.select-btn {
+  background-color: #02bd7e;
+  color: #fff;
+  border: 0px;
+  border-radius: 4px;
+  width: 6em;
+  height: 4em;
+  margin: 0.5em 1em 0.5em 1em
 }
