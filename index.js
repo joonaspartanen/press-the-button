@@ -1,4 +1,10 @@
-const app = require('./app')
+const express = require('express')
+const app = express()
+const cors = require('cors')
+
+app.use(cors())
+app.use(express.static('build'))
+
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
@@ -8,39 +14,21 @@ let counter = 0
 // Clicks to the next prize
 let nextPrize = 10
 
-// Array to store the game state 
+// Array to store the game state
 let players = []
-
-const findPlayer = id => {
-  return players.find(p => p.id === id)
-}
-
-const sendGameState = () => {
-  io.sockets.emit('gameState', {
-    players: players,
-    toNextPrize: nextPrize - counter
-  })
-}
-
-const handleWin = (prize, player) => {
-  nextPrize = nextPrize + 10
-  io.to(player.id).emit('win', prize)
-  return prize
-}
 
 io.on('connection', socket => {
   console.log('user connected')
 
   socket.on('newPlayer', name => {
     players.push({ name: name, id: socket.id, score: 20 })
-    sendGameState()
+    sendGameState(io, players, nextPrize, counter)
   })
 
   socket.on('click', () => {
     counter = counter + 1
     const player = findPlayer(socket.id)
     console.log(`player ${player.id} clicked the button`)
-    console.log(`the counter is ${counter}`)
 
     // Player loses 1 point if there's no prize
     let scoreChange = -1
@@ -62,8 +50,6 @@ io.on('connection', socket => {
     players = players.map(p =>
       p.id !== player.id ? p : { ...p, score: p.score + scoreChange }
     )
-
-    console.log(`${nextPrize - counter} clicks to the next prize`)
     sendGameState()
   })
 
@@ -84,7 +70,25 @@ io.on('connection', socket => {
   })
 })
 
-const PORT = 5000
+// Helper functions
+const findPlayer = id => {
+  return players.find(p => p.id === id)
+}
+
+const sendGameState = () => {
+  io.sockets.emit('gameState', {
+    players: players,
+    toNextPrize: nextPrize - counter
+  })
+}
+
+const handleWin = (prize, player) => {
+  nextPrize = nextPrize + 10
+  io.to(player.id).emit('win', prize)
+  return prize - 1
+}
+
+const PORT = process.env.PORT || 5000
 server.listen(PORT, () => {
   console.log(`Listening port ${PORT}`)
 })
