@@ -5,7 +5,7 @@ import GameView from './components/GameView'
 import NameForm from './components/NameForm'
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:5000')
+const socket = io()
 
 const App = () => {
   const [players, setPlayers] = useState([])
