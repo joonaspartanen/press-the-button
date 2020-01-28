@@ -78,6 +78,12 @@ const findPlayer = id => {
   return players.find(p => p.id === id)
 }
 
+const handleWin = (prize, player) => {
+  nextPrize = nextPrize + 10
+  io.to(player.id).emit('win', prize)
+  return prize - 1
+}
+
 const sendGameState = () => {
   io.sockets.emit('gameState', {
     players: players,
