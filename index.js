@@ -69,9 +69,10 @@ const handleClick = socket => {
   }
 
   // Update the game state
-  players = players.map(p =>
-    p.id !== player.id ? p : { ...p, score: p.score + scoreChange }
-  )
+  //players = players.map(p =>
+  //  p.id !== player.id ? p : { ...p, score: p.score + scoreChange }
+  //)
+  player.score = player.score + scoreChange
 }
 
 const findPlayer = id => {
