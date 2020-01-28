@@ -1,3 +1,5 @@
+![Node CI](https://github.com/joonaspartanen/press-the-button/workflows/Node%20CI/badge.svg)
+
 # Press the Button
 
 ## About
