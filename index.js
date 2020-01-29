@@ -14,14 +14,8 @@ let players = []
 io.on('connection', socket => {
   console.log('user connected')
 
-  socket.on('connection name', user => {
-    io.to(socket.id).emit('new user', user.name + ' has joined.')
-    sendGameState()
-  })
-
   socket.on('newPlayer', name => {
     players.push({ name: name, id: socket.id, score: 20 })
-    io.sockets.emit('new user', name + ' has joined.')
     sendGameState()
   })
 
