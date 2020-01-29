@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Table } from 'react-bootstrap'
 import { Hammer } from 'react-bootstrap-icons'
 
 import Notification from './Notification'
@@ -60,7 +60,17 @@ const GameView = ({
           </button>
         </Col>
         <Col md={4} className="text-center">
-          {players !== null && <PlayerList players={players}></PlayerList>}
+          <Table striped bordered size="sm">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <PlayerList players={players}></PlayerList>
+            </tbody>
+          </Table>
         </Col>
       </Row>
     </Container>

@@ -1,12 +1,11 @@
 import React from 'react'
 
-const PlayerRow = ({ players }) => {
-  players.map(p => {
+const players = [{ id: 1, name: 'Joonas', score: 20 }]
+
+const PlayerRow = () => {
+  players.map((p) => {
     return (
-      <tr key={p.id}>
-        <td>{p.name}</td>
-        <td>{p.score}</td>
-      </tr>
+      <li></li>
     )
   })
 }
