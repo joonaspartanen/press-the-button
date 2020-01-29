@@ -60,12 +60,7 @@ const GameView = ({
           </button>
         </Col>
         <Col md={4} className="text-center">
-          {players !== null && (
-            <ul className="list-unstyled">
-              <h3>Current players</h3>
-              <PlayerList players={players}></PlayerList>
-            </ul>
-          )}
+          {players !== null && <PlayerList players={players}></PlayerList>}
         </Col>
       </Row>
     </Container>

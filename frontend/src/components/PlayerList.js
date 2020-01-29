@@ -1,13 +1,21 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
+import PlayerRow from './PlayerRow'
 
-const PlayerList = ({ players }) =>
-  players.map(p => {
-    return (
-      <li key={p.id} style={{ color: '#000' }}>
-        {p.name} has {p.score} points
-      </li>
-    )
-  })
+const PlayerList = ({ players }) => {
+  return (
+    <Table striped bordered size="sm">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <PlayerRow players={players} />
+      </tbody>
+    </Table>
+  )
+}
 
 export default PlayerList
