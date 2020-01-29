@@ -55,6 +55,7 @@ const App = () => {
         {user ? (
           <GameView
             notification={notification}
+            setNotification={setNotification}
             players={players}
             lostGame={lostGame}
             setLostGame={setLostGame}
@@ -68,7 +69,5 @@ const App = () => {
     </div>
   )
 }
-
-
 
 export default App

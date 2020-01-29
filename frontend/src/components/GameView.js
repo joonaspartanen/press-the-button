@@ -7,6 +7,7 @@ import PlayerList from './PlayerList'
 
 const GameView = ({
   notification,
+  setNotification,
   players,
   lostGame,
   setLostGame,
@@ -21,11 +22,13 @@ const GameView = ({
   const playAgain = () => {
     socket.emit('playAgain')
     setLostGame(false)
+    setNotification('')
   }
 
   const leaveGame = () => {
     socket.emit('leaveGame')
     setLostGame(false)
+    setNotification('')
     setUser('')
   }
 
