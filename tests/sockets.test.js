@@ -2,6 +2,7 @@ const io = require('socket.io-client')
 const server = require('../index')
 
 const socketURL = 'http://localhost:5000'
+let socket
 
 const options = {
   transports: ['websocket'],
@@ -13,43 +14,44 @@ afterAll(() => {
 })
 
 describe('The server handles socket events correctly', () => {
-  describe('New player', () => {
-    test('New player is added to the game state', done => {
-      const socket = io.connect(socketURL, options)
-
+  describe('When new player joins', () => {
+    beforeEach(() => {
+      socket = io.connect(socketURL, options)
       socket.on('connect', data => {
         socket.emit('newPlayer', 'Tester')
       })
+    })
 
+    afterEach(() => {
+      socket.disconnect()
+    })
+
+    test('new player is added to players', done => {
       socket.on('gameState', data => {
-        console.log(socket.id)
-        console.log(data)
-        console.log(data.players)
-        expect(data.players.length).toBe(1)
-        expect(data.players[0].name).toBe('Tester')
-        socket.disconnect()
+        expect(data.players).toHaveLength(1)
         done()
       })
     })
 
-    test('New player starts with 20 points', done => {
-      const socket = io.connect(socketURL, options)
-
-      socket.on('connect', data => {
-        socket.emit('newPlayer', 'Tester')
+    test('the name of the new player is correct', () => {
+      socket.on('gameState', data => {
+        expect(data.players[0].name).toBe('Tester')
+        done()
       })
+    })
 
+    test('new player starts with 20 points', done => {
       socket.on('gameState', data => {
         expect(data.players[0].score).toBe(20)
-        socket.disconnect()
         done()
       })
     })
-  })
-})
 
-describe('Sample Test', () => {
-  test('true === true', () => {
-    expect(true).toBe(true)
+    test('socket id becomes the player id', done => {
+      socket.on('gameState', data => {
+        expect(data.players[0].id).toBe(socket.id)
+        done()
+      })
+    })
   })
 })
