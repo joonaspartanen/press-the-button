@@ -46,27 +46,15 @@ const handleClick = socket => {
   const player = findPlayer(socket.id)
   console.log(`player ${player.id} clicked the button`)
 
-  // Player loses 1 point if there's no prize
-  let scoreChange = -1
-
   if (counter % 500 === 0) {
-    scoreChange = handleWin(250, player)
+    handleWin(250, player)
   } else if (counter % 100 === 0) {
-    scoreChange = handleWin(40, player)
+    handleWin(40, player)
   } else if (counter % 10 === 0) {
-    scoreChange = handleWin(5, player)
+    handleWin(5, player)
   } else {
-    io.to(player.id).emit('noWin', nextPrize - counter)
-    if (player.score === 1) {
-      io.to(player.id).emit('lostGame')
-    }
+    handleLose(player)
   }
-
-  // Update the game state
-  //players = players.map(p =>
-  //  p.id !== player.id ? p : { ...p, score: p.score + scoreChange }
-  //)
-  player.score = player.score + scoreChange
 }
 
 const findPlayer = id => {
@@ -76,7 +64,19 @@ const findPlayer = id => {
 const handleWin = (prize, player) => {
   nextPrize = nextPrize + 10
   io.to(player.id).emit('win', prize)
-  return prize - 1
+  updateScore(player, prize)
+}
+
+const handleLose = player => {
+  io.to(player.id).emit('noWin', nextPrize - counter)
+  if (player.score === 1) {
+    io.to(player.id).emit('lostGame')
+  }
+  updateScore(player, 0)
+}
+
+const updateScore = (player, prize) => {
+  player.score = player.score + prize - 1
 }
 
 const sendGameState = () => {
