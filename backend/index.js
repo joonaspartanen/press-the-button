@@ -44,7 +44,7 @@ io.on('connection', socket => {
 const handleClick = socket => {
   counter = counter + 1
   const player = findPlayer(socket.id)
-  console.log(`player ${player.id} clicked the button`)
+  //console.log(`player ${player.id} clicked the button`)
 
   if (counter % 500 === 0) {
     handleWin(250, player)
@@ -82,7 +82,8 @@ const updateScore = (player, prize) => {
 const sendGameState = () => {
   io.sockets.emit('gameState', {
     players: players,
-    toNextPrize: nextPrize - counter
+    toNextPrize: nextPrize - counter,
+    counter: counter
   })
 }
 
@@ -91,4 +92,4 @@ server.listen(PORT, () => {
   console.log(`Listening port ${PORT}`)
 })
 
-module.exports = server
+module.exports = { server, handleClick, counter }
