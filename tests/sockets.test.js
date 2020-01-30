@@ -1,5 +1,5 @@
 const io = require('socket.io-client')
-const server = require('../index')
+const { server } = require('../index')
 
 const socketURL = 'http://localhost:5000'
 let socket
@@ -52,6 +52,32 @@ describe('The server handles socket events correctly', () => {
         expect(data.players[0].id).toBe(socket.id)
         done()
       })
+    })
+  })
+
+  describe('When button is clicked', () => {
+    //const index = require('../index')
+    //const spy = jest.spyOn(index, 'handleClick')
+
+    beforeEach(() => {
+      socket = io.connect(socketURL, options)
+      socket.on('connect', data => {
+        socket.emit('newPlayer', 'Tester')
+      })
+    })
+
+    afterEach(() => {
+      socket.disconnect()
+    })
+
+    test('counter is incremented by 1', done => {
+      const { counter } = require('../index')
+      expect(counter).toBe(0)
+      socket.emit('click')
+      socket.on('gameState', data => {
+        //TODO
+      })
+      done()
     })
   })
 })
