@@ -51,7 +51,7 @@ const App = () => {
       ) : (
         <NameForm setUser={setUser} socket={socket}></NameForm>
       )}
-    </divJo>
+    </div>
   )
 }
 
