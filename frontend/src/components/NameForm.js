@@ -22,13 +22,14 @@ const NameForm = ({ setUser, socket }) => {
       <Form onSubmit={enterGame}>
         <Form.Group>
           <Form.Control
+            data-cy="name-form"
             type="text"
             value={name}
             onChange={handleNameChange}
             required
             autoFocus
           ></Form.Control>
-          <button className="select-btn" type="submit">
+          <button className="select-btn" type="submit" data-cy="join-btn">
             Play!
           </button>
         </Form.Group>

@@ -58,7 +58,7 @@ const GameView = ({
           <Notification notification={notification}></Notification>
         </Col>
         <Col md={4} className="text-center">
-          <button className="game-btn" onClick={handleClick}>
+          <button data-cy="game-btn" className="game-btn" onClick={handleClick}>
             <Hammer size={'6em'}></Hammer>
           </button>
         </Col>

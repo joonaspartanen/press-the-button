@@ -4,7 +4,11 @@ const Notification = ({ notification }) => {
   if (notification === '') {
     return <div></div>
   }
-  return <div style={{ marginBottom: '1em' }}>{notification}</div>
+  return (
+    <div data-cy="notification" style={{ marginBottom: '1em' }}>
+      {notification}
+    </div>
+  )
 }
 
 export default Notification

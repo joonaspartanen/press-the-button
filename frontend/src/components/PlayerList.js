@@ -11,7 +11,7 @@ const PlayerList = ({ players }) =>
     return (
       <tr key={p.id}>
         <th>{p.name}</th>
-        <th>{p.score}</th>
+        <th data-cy="score">{p.score}</th>
       </tr>
     )
   })
