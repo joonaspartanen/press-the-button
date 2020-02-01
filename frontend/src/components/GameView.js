@@ -1,6 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Table } from 'react-bootstrap'
-import { Hammer } from 'react-bootstrap-icons'
+import { Grid, Header, Button } from 'semantic-ui-react'
 
 import Notification from './Notification'
 import PlayerList from './PlayerList'
@@ -34,49 +33,58 @@ const GameView = ({
 
   if (lostGame) {
     return (
-      <Container fluid={'true'}>
-        <h1 style={{ textAlign: 'center' }}>You lose!</h1>
-        <h2 style={{ textAlign: 'center' }}>Do you want to play again?</h2>
-        <Row className="justify-content-center">
-          <button className="select-btn" onClick={playAgain}>
+      <Grid
+        verticalAlign='middle'
+        textAlign='center'
+        style={{ height: 'calc(100vh - 50px)' }}
+      >
+        <Grid.Column>
+          <Header as='h1' style={{ color: '#fff', paddingTop: '1em' }}>
+            You lose!
+          </Header>
+          <Header as='h2' style={{ color: '#fff', paddingBottom: '1em' }}>
+            Do you want to play again?
+          </Header>
+          <Button
+            onClick={playAgain}
+            color='green'
+            size='huge'
+            style={{ marginRight: '1em' }}
+          >
             Yes
-          </button>
-          <button className="select-btn" onClick={leaveGame}>
+          </Button>
+          <Button onClick={leaveGame} color='red' size='huge'>
             No
-          </button>
-        </Row>
-      </Container>
+          </Button>
+        </Grid.Column>
+      </Grid>
     )
   }
   return (
-    <Container fluid={'true'}>
-      <h1 style={{ color: '#000', marginTop: '1em', textAlign: 'center' }}>
-        Press the Button!
-      </h1>
-      <Row className="justify-content-center" style={{ paddingTop: '2em' }}>
-        <Col md={4} className="text-center">
-          <Notification notification={notification}></Notification>
-        </Col>
-        <Col md={4} className="text-center">
-          <button data-cy="game-btn" className="game-btn" onClick={handleClick}>
-            <Hammer size={'6em'}></Hammer>
-          </button>
-        </Col>
-        <Col md={4} className="text-center">
-          <Table striped bordered size="sm">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              <PlayerList players={players}></PlayerList>
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
-    </Container>
+    <Grid
+      verticalAlign='middle'
+      textAlign='center'
+      style={{ height: 'calc(100vh - 50px)' }}
+    >
+      <Grid.Column textAlign='center' width={8}>
+        <Header
+          as='h1'
+          style={{ color: '#fff', paddingTop: '1em', paddingBottom: '1em' }}
+        >
+          Press the Button!
+        </Header>
+        <Button
+          data-cy='game-btn'
+          color='red'
+          className='game-btn'
+          onClick={handleClick}
+        ></Button>
+        <Notification notification={notification}></Notification>
+      </Grid.Column>
+      <Grid.Column textAlign='center' width={4}>
+        <PlayerList players={players}></PlayerList>
+      </Grid.Column>
+    </Grid>
   )
 }
 

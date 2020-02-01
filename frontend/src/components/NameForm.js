@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Form } from 'react-bootstrap'
+import { Button, Form, Grid, Header } from 'semantic-ui-react'
 
 const NameForm = ({ setUser, socket }) => {
   const [name, setName] = useState('')
@@ -15,26 +15,39 @@ const NameForm = ({ setUser, socket }) => {
   }
 
   return (
-    <Container className="text-center">
-      <h2 style={{ color: '#000', marginTop: '2em', marginBottom: '1em' }}>
-        What's your name?
-      </h2>
-      <Form onSubmit={enterGame}>
-        <Form.Group>
-          <Form.Control
-            data-cy="name-form"
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-            required
-            autoFocus
-          ></Form.Control>
-          <button className="select-btn" type="submit" data-cy="join-btn">
+    <Grid
+      verticalAlign='middle'
+      textAlign='center'
+      style={{ height: 'calc(100vh - 50px)' }}
+    >
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as='h2' style={{ color: '#fff' }} textAlign='center'>
+          What's your name?
+        </Header>
+        <Form size='large' onSubmit={enterGame}>
+          <Form.Field>
+            <Form.Input
+              data-cy='name-form'
+              type='text'
+              value={name}
+              onChange={handleNameChange}
+              required
+              autoFocus
+            ></Form.Input>
+          </Form.Field>
+          <Button
+            type='submit'
+            fluid
+            size='large'
+            color='green'
+            className='join-btn'
+            data-cy='join-btn'
+          >
             Play!
-          </button>
-        </Form.Group>
-      </Form>
-    </Container>
+          </Button>
+        </Form>
+      </Grid.Column>
+    </Grid>
   )
 }
 

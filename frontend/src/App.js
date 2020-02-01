@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Navbar, Nav } from 'react-bootstrap'
+import { Grid } from 'semantic-ui-react'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import GameView from './components/GameView'
 import NameForm from './components/NameForm'
@@ -29,41 +30,28 @@ const App = () => {
   }, [players, lostGame])
 
   return (
-    <div>
-      <Container
-        fluid={'true'}
-        style={{
-          paddingLeft: 0,
-          paddingRight: 0,
-          backgroundColor: '#f5f8fa',
-          height: '100vh'
-        }}
-      >
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#">Press the Button</Navbar.Brand>
-          <Nav>
-            <Nav.Item>
-              <Nav.Link href="https://github.com/joonaspartanen/press-the-button">
-                About
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Navbar>
-        {user ? (
-          <GameView
-            notification={notification}
-            setNotification={setNotification}
-            players={players}
-            lostGame={lostGame}
-            setLostGame={setLostGame}
-            setUser={setUser}
-            socket={socket}
-          ></GameView>
-        ) : (
-          <NameForm setUser={setUser} socket={socket}></NameForm>
-        )}
-      </Container>
-    </div>
+    <div
+      style={{
+        paddingLeft: 0,
+        paddingRight: 0,
+        backgroundColor: '#2a3950',
+        height: '100vh'
+      }}
+    >
+      {user ? (
+        <GameView
+          notification={notification}
+          setNotification={setNotification}
+          players={players}
+          lostGame={lostGame}
+          setLostGame={setLostGame}
+          setUser={setUser}
+          socket={socket}
+        ></GameView>
+      ) : (
+        <NameForm setUser={setUser} socket={socket}></NameForm>
+      )}
+    </divJo>
   )
 }
 

@@ -1,19 +1,25 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Table } from 'semantic-ui-react'
 
-const players = [
-  { id: 1, name: 'Joonas', score: 20 },
-  { id: 2, name: 'Nuutti', score: 20 }
-]
-
-const PlayerList = ({ players }) =>
-  players.map(p => {
-    return (
-      <tr key={p.id}>
-        <th>{p.name}</th>
-        <th data-cy="score">{p.score}</th>
-      </tr>
-    )
-  })
+const PlayerList = ({ players }) => {
+  return (
+    <Table basic='very' inverted celled>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>Name</Table.HeaderCell>
+          <Table.HeaderCell>score</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {players.map(p => (
+          <Table.Row key={p.id}>
+            <Table.Cell>{p.name}</Table.Cell>
+            <Table.Cell>{p.score}</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
+  )
+}
 
 export default PlayerList

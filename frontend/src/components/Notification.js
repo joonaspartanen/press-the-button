@@ -1,13 +1,18 @@
 import React from 'react'
+import { Header } from 'semantic-ui-react'
 
 const Notification = ({ notification }) => {
   if (notification === '') {
-    return <div></div>
+    return <div style={{ height: '50px', marginBottom: '1em' }}></div>
   }
   return (
-    <div data-cy="notification" style={{ marginBottom: '1em' }}>
+    <Header
+      as='h3'
+      data-cy='notification'
+      style={{ color: '#fff', height: '50px', marginBottom: '1em' }}
+    >
       {notification}
-    </div>
+    </Header>
   )
 }
 
