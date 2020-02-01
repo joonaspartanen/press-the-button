@@ -4,7 +4,7 @@ describe('Join game ', function() {
   })
 
   it('front page can be opened', function() {
-    cy.contains('Press the Button')
+    cy.contains("What's your name?")
   })
 
   it('user can join the game', function() {
