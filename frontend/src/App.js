@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Navbar, Nav, Row, Col, Form, Button } from 'react-bootstrap'
+import { Container, Navbar, Nav } from 'react-bootstrap'
 import './App.css'
 import GameView from './components/GameView'
 import NameForm from './components/NameForm'
@@ -15,16 +15,13 @@ const App = () => {
 
   useEffect(() => {
     socket.on('gameState', data => {
-      console.log(data)
       setPlayers(data.players)
-      console.log(lostGame)
     })
     socket.on('lostGame', () => {
       setLostGame(true)
     })
     socket.on('win', prize => {
       setNotification(`You win ${prize} points!`)
-      console.log(`new score ${prize}`)
     })
     socket.on('noWin', toNextPrize => {
       setNotification(`The next prize is ${toNextPrize} clicks away!`)

@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { Container, Form, Row, Col } from 'react-bootstrap'
+import { Container, Form } from 'react-bootstrap'
 
 const NameForm = ({ setUser, socket }) => {
   const [name, setName] = useState('')
 
   const handleNameChange = event => {
     setName(event.target.value)
-    console.log(name)
   }
 
   const enterGame = event => {
