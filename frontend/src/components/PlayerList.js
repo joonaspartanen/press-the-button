@@ -3,11 +3,11 @@ import { Table } from 'semantic-ui-react'
 
 const PlayerList = ({ players }) => {
   return (
-    <Table basic='very' inverted celled>
+    <Table basic='very' inverted unstackable textAlign='center'>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Name</Table.HeaderCell>
-          <Table.HeaderCell>score</Table.HeaderCell>
+          <Table.HeaderCell>Score</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
