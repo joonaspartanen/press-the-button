@@ -37,8 +37,8 @@ const GameView = ({
             style={{
               color: '#fff',
               fontSize: '300%',
-              paddingTop: '2em',
-              marginBottom: '10vw'
+              paddingTop: '5vw',
+              marginBottom: '5vw'
             }}
           >
             Press the Button!
