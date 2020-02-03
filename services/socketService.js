@@ -17,6 +17,7 @@ const addPlayer = (socket, name) => {
 
 const resetPlayer = socket => {
   players = players.map(p => (p.id !== socket.id ? p : { ...p, score: 20 }))
+  sortPlayers()
 }
 
 const removePlayer = socket => {
@@ -57,6 +58,11 @@ const handleLose = (player, io) => {
 
 const updateScore = (player, prize) => {
   player.score = player.score + prize - 1
+  sortPlayers()
+}
+
+const sortPlayers = () => {
+  players = players.sort((p1, p2) => p2.score - p1.score)
 }
 
 const sendGameState = io => {
