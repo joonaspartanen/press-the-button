@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import GameView from './components/GameView'
 import NameForm from './components/NameForm'
+import Footer from './components/Footer'
 import io from 'socket.io-client'
 
 const socket = io()
@@ -49,6 +50,7 @@ const App = () => {
       ) : (
         <NameForm setUser={setUser} socket={socket} />
       )}
+      <Footer></Footer>
     </Container>
   )
 }
