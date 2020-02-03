@@ -71,12 +71,10 @@ describe('The server handles socket events correctly', () => {
     })
 
     test('counter is incremented by 1', done => {
-      const { counter } = require('../index')
+      const { counter, handleClick } = require('../services/socketService')
       expect(counter).toBe(0)
-      socket.emit('click')
-      socket.on('gameState', data => {
-        //TODO
-      })
+      console.log(counter)
+      // TODO
       done()
     })
   })
