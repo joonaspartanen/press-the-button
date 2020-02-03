@@ -38,7 +38,7 @@ const GameView = ({
               color: '#fff',
               fontSize: '300%',
               paddingTop: '2em',
-              paddingBottom: '1.5em'
+              marginBottom: '10vw'
             }}
           >
             Press the Button!
@@ -58,7 +58,7 @@ const GameView = ({
         <Grid.Column
           textAlign='center'
           width={6}
-          style={{ paddingRight: '8em', paddingTop: '2em' }}
+          style={{ paddingRight: '8em' }}
         >
           <PlayerList players={players} />
         </Grid.Column>
