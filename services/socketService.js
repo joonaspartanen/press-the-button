@@ -49,7 +49,7 @@ const aboutToLose = player => {
 }
 
 const handleLose = (player, io) => {
-  aboutToLose
+  aboutToLose(player)
     ? io.to(player.id).emit('lostGame')
     : io.to(player.id).emit('noWin', nextPrize - counter)
   updateScore(player, 0)
