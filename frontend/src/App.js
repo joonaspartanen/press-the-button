@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Grid } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import GameView from './components/GameView'
@@ -10,7 +10,7 @@ const socket = io()
 
 const App = () => {
   const [players, setPlayers] = useState([])
-  const [notification, setNotification] = useState('')
+  const [notification, setNotification] = useState('Ready to play?')
   const [user, setUser] = useState('')
   const [lostGame, setLostGame] = useState(false)
 
@@ -30,12 +30,10 @@ const App = () => {
   }, [players, lostGame])
 
   return (
-    <div
+    <Container
       style={{
-        paddingLeft: 0,
-        paddingRight: 0,
         backgroundColor: '#2a3950',
-        height: '100vh'
+        minHeight: '100vh'
       }}
     >
       {user ? (
@@ -47,11 +45,11 @@ const App = () => {
           setLostGame={setLostGame}
           setUser={setUser}
           socket={socket}
-        ></GameView>
+        />
       ) : (
-        <NameForm setUser={setUser} socket={socket}></NameForm>
+        <NameForm setUser={setUser} socket={socket} />
       )}
-    </div>
+    </Container>
   )
 }
 

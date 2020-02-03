@@ -1,3 +1,6 @@
+body {
+  background-color: #2a3950;
+}
 .App {
   text-align: center;
 }
@@ -6,8 +9,8 @@
   color: #fff;
   border: 0px;
   border-radius: 50%;
-  height: 10em;
-  width: 10em;
+  height: 12em;
+  width: 12em;
   margin: 0em 0em 2em 0em;
   box-shadow: 2px 3px 5px #8b0000;
 }

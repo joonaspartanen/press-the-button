@@ -3,6 +3,7 @@ import { Grid, Header, Button } from 'semantic-ui-react'
 
 import Notification from './Notification'
 import PlayerList from './PlayerList'
+import PlayAgain from './PlayAgain'
 
 const GameView = ({
   notification,
@@ -14,76 +15,54 @@ const GameView = ({
   socket
 }) => {
   const handleClick = () => {
-    console.log('click')
     socket.emit('click')
-  }
-
-  const playAgain = () => {
-    socket.emit('playAgain')
-    setLostGame(false)
-    setNotification('')
-  }
-
-  const leaveGame = () => {
-    socket.emit('leaveGame')
-    setLostGame(false)
-    setNotification('')
-    setUser('')
   }
 
   if (lostGame) {
     return (
-      <Grid
-        verticalAlign='middle'
-        textAlign='center'
-        style={{ height: 'calc(100vh - 50px)' }}
-      >
-        <Grid.Column>
-          <Header as='h1' style={{ color: '#fff', paddingTop: '1em' }}>
-            You lose!
-          </Header>
-          <Header as='h2' style={{ color: '#fff', paddingBottom: '1em' }}>
-            Do you want to play again?
-          </Header>
-          <Button
-            onClick={playAgain}
-            color='green'
-            size='huge'
-            style={{ marginRight: '1em' }}
-          >
-            Yes
-          </Button>
-          <Button onClick={leaveGame} color='red' size='huge'>
-            No
-          </Button>
-        </Grid.Column>
-      </Grid>
+      <PlayAgain
+        socket={socket}
+        setLostGame={setLostGame}
+        setNotification={setNotification}
+        setUser={setUser}
+      />
     )
   }
   return (
-    <Grid
-      verticalAlign='middle'
-      textAlign='center'
-      style={{ height: 'calc(100vh - 50px)' }}
-    >
-      <Grid.Column textAlign='center' width={8}>
-        <Header
-          as='h1'
-          style={{ color: '#fff', paddingTop: '1em', paddingBottom: '1em' }}
+    <Grid textAlign='center' stackable>
+      <Grid.Row columns={1}>
+        <Grid.Column textAlign='center'>
+          <Header
+            as='h1'
+            style={{
+              color: '#fff',
+              fontSize: '300%',
+              paddingTop: '2em',
+              paddingBottom: '1.5em'
+            }}
+          >
+            Press the Button!
+          </Header>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column width={10} textAlign='center'>
+          <Button
+            data-cy='game-btn'
+            color='red'
+            className='game-btn'
+            onClick={handleClick}
+          ></Button>
+          <Notification notification={notification} />
+        </Grid.Column>
+        <Grid.Column
+          textAlign='center'
+          width={6}
+          style={{ paddingRight: '8em', paddingTop: '2em' }}
         >
-          Press the Button!
-        </Header>
-        <Button
-          data-cy='game-btn'
-          color='red'
-          className='game-btn'
-          onClick={handleClick}
-        ></Button>
-        <Notification notification={notification}></Notification>
-      </Grid.Column>
-      <Grid.Column textAlign='center' width={4}>
-        <PlayerList players={players}></PlayerList>
-      </Grid.Column>
+          <PlayerList players={players} />
+        </Grid.Column>
+      </Grid.Row>
     </Grid>
   )
 }
