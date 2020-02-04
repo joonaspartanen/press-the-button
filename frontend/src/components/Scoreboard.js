@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react'
 
-const PlayerList = ({ players }) => {
+const Scoreboard = ({ players }) => {
   return (
     <Table basic='very' inverted unstackable textAlign='center'>
       <Table.Header>
@@ -22,4 +22,4 @@ const PlayerList = ({ players }) => {
   )
 }
 
-export default PlayerList
+export default Scoreboard

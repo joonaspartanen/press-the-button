@@ -2,8 +2,8 @@ import React from 'react'
 import { Grid, Header, Button } from 'semantic-ui-react'
 
 import Notification from './Notification'
-import PlayerList from './PlayerList'
 import PlayAgain from './PlayAgain'
+import Scoreboard from './Scoreboard'
 
 const GameView = ({
   notification,
@@ -60,7 +60,7 @@ const GameView = ({
           width={6}
           style={{ paddingRight: '8em' }}
         >
-          <PlayerList players={players} />
+          <Scoreboard players={players} />
         </Grid.Column>
       </Grid.Row>
     </Grid>
