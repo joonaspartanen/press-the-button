@@ -8,7 +8,7 @@ describe('Join game ', function() {
   })
 
   it('user can join the game', function() {
-    cy.get('[data-cy=name-form]').type('Tester')
+    cy.get('[data-cy=name-input]').type('Tester')
     cy.get('[data-cy=join-btn]').click()
     cy.contains('Press the Button!')
   })
@@ -17,7 +17,7 @@ describe('Join game ', function() {
 describe('When button clicked', function() {
   beforeEach(function() {
     cy.visit('http://localhost:3000')
-    cy.get('[data-cy=name-form]').type('Tester')
+    cy.get('[data-cy=name-input]').type('Tester')
     cy.get('[data-cy=join-btn]').click()
     cy.contains('Press the Button!')
     cy.get('[data-cy=game-btn]').click()

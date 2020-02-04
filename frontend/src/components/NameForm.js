@@ -27,12 +27,13 @@ const NameForm = ({ setUser, socket }) => {
         <Form size='large' onSubmit={enterGame}>
           <Form.Field>
             <Form.Input
-              data-cy='name-form'
               type='text'
               value={name}
               onChange={handleNameChange}
               required
               autoFocus
+              className='name-input'
+              data-cy='name-input'
             ></Form.Input>
           </Form.Field>
           <Button
