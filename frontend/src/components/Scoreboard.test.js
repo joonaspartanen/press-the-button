@@ -14,8 +14,6 @@ test('Scoreboard contains all players', () => {
 
   const component = render(<Scoreboard players={players} />)
 
-  component.debug()
-
   expect(component.container).toHaveTextContent('Tester')
   expect(component.container).toHaveTextContent('Tester2')
   expect(component.container).toHaveTextContent('Tester3')
