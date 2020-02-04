@@ -14,16 +14,18 @@ afterAll(() => {
 })
 
 describe('The server handles socket events correctly', () => {
-  describe('When new player joins', () => {
-    beforeEach(() => {
+  describe('when new player joins', () => {
+    beforeEach(done => {
       socket = io.connect(socketURL, options)
       socket.on('connect', data => {
         socket.emit('newPlayer', 'Tester')
+        done()
       })
     })
 
-    afterEach(() => {
+    afterEach(done => {
       socket.disconnect()
+      done()
     })
 
     test('new player is added to players', done => {
@@ -33,16 +35,9 @@ describe('The server handles socket events correctly', () => {
       })
     })
 
-    test('the name of the new player is correct', () => {
+    test('the name of the new player is correct', done => {
       socket.on('gameState', data => {
         expect(data.players[0].name).toBe('Tester')
-        done()
-      })
-    })
-
-    test('new player starts with 20 points', done => {
-      socket.on('gameState', data => {
-        expect(data.players[0].score).toBe(20)
         done()
       })
     })
@@ -53,29 +48,13 @@ describe('The server handles socket events correctly', () => {
         done()
       })
     })
-  })
 
-  describe('When button is clicked', () => {
-    //const index = require('../index')
-    //const spy = jest.spyOn(index, 'handleClick')
-
-    beforeEach(() => {
-      socket = io.connect(socketURL, options)
-      socket.on('connect', data => {
-        socket.emit('newPlayer', 'Tester')
+    test('new player starts with 20 points', done => {
+      socket.on('gameState', data => {
+        console.log(data.players)
+        expect(data.players[0].score).toBe(20)
+        done()
       })
-    })
-
-    afterEach(() => {
-      socket.disconnect()
-    })
-
-    test('counter is incremented by 1', done => {
-      const { counter, handleClick } = require('../services/socketService')
-      expect(counter).toBe(0)
-      console.log(counter)
-      // TODO
-      done()
     })
   })
 })
