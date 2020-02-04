@@ -1,41 +1,17 @@
-const app = require('./app')
+const express = require('express')
+const app = express()
+const cors = require('cors')
+
+app.use(cors())
+app.use(express.static('build'))
+
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
-const {
-  addPlayer,
-  resetPlayer,
-  removePlayer,
-  sendGameState,
-  handleClick
-} = require('./services/socketService')
+const socketHandler = require('./routes/socket')
 
 io.on('connection', socket => {
   console.log('user connected')
-
-  socket.on('newPlayer', name => {
-    addPlayer(socket, name)
-    sendGameState(io)
-  })
-
-  socket.on('click', () => {
-    handleClick(io, socket)
-    sendGameState(io)
-  })
-
-  socket.on('playAgain', () => {
-    resetPlayer(socket)
-    sendGameState(io)
-  })
-
-  socket.on('leaveGame', () => {
-    removePlayer(socket)
-    sendGameState(io)
-  })
-
-  socket.on('disconnect', () => {
-    removePlayer(socket)
-    sendGameState(io)
-  })
+  socketHandler(io, socket)
 })
 
 const PORT = process.env.PORT || 5000

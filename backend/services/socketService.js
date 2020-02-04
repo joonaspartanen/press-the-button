@@ -13,6 +13,7 @@ const findPlayer = id => {
 
 const addPlayer = (socket, name) => {
   players.push({ name: name, id: socket.id, score: 20 })
+  sortPlayers()
 }
 
 const resetPlayer = socket => {
