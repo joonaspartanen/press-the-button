@@ -1,17 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Form, Grid, Header } from 'semantic-ui-react'
 
-const NameForm = ({ setUser, socket }) => {
-  const [name, setName] = useState('')
-
+const NameForm = ({ enterGame, name, setName }) => {
   const handleNameChange = event => {
     setName(event.target.value)
-  }
-
-  const enterGame = event => {
-    event.preventDefault()
-    socket.emit('newPlayer', name)
-    setUser(name)
   }
 
   return (

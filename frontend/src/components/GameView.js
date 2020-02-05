@@ -7,24 +7,17 @@ import Scoreboard from './Scoreboard'
 
 const GameView = ({
   notification,
-  setNotification,
   players,
   lostGame,
-  setLostGame,
-  setUser,
-  socket
+  clickGameButton,
+  playAgain,
+  leaveGame
 }) => {
-  const handleClick = () => {
-    socket.emit('click')
-  }
-
   if (lostGame) {
     return (
       <PlayAgain
-        socket={socket}
-        setLostGame={setLostGame}
-        setNotification={setNotification}
-        setUser={setUser}
+        playAgain={playAgain}
+        leaveGame={leaveGame}
       />
     )
   }
@@ -51,7 +44,7 @@ const GameView = ({
             data-cy='game-btn'
             color='red'
             className='game-btn'
-            onClick={handleClick}
+            onClick={clickGameButton}
           ></Button>
           <Notification notification={notification} />
         </Grid.Column>

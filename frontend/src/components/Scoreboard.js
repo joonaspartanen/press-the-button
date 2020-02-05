@@ -12,10 +12,10 @@ const Scoreboard = ({ players }) => {
       </Table.Header>
       <Table.Body>
         {players.map(p => (
-          <Table.Row key={p.id}>
-            <Table.Cell>{p.name}</Table.Cell>
-            <Table.Cell>{p.score}</Table.Cell>
-          </Table.Row>
+            <Table.Row key={p.name}>
+              <Table.Cell>{p.name}</Table.Cell>
+              <Table.Cell>{p.score}</Table.Cell>
+            </Table.Row>
         ))}
       </Table.Body>
     </Table>

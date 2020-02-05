@@ -13,7 +13,32 @@ const App = () => {
   const [players, setPlayers] = useState([])
   const [notification, setNotification] = useState('Ready to play?')
   const [user, setUser] = useState('')
+  const [name, setName] = useState('')
   const [lostGame, setLostGame] = useState(false)
+
+  const enterGame = event => {
+    console.log('click')
+    event.preventDefault()
+    socket.emit('newPlayer', name)
+    setUser(name)
+  }
+
+  const playAgain = () => {
+    socket.emit('playAgain')
+    setLostGame(false)
+    setNotification('Ready to play?')
+  }
+
+  const leaveGame = () => {
+    socket.emit('leaveGame')
+    setLostGame(false)
+    setNotification('Ready to play?')
+    setUser('')
+  }
+
+  const clickGameButton = () => {
+    socket.emit('click')
+  }
 
   useEffect(() => {
     socket.on('gameState', data => {
@@ -42,13 +67,12 @@ const App = () => {
           notification={notification}
           setNotification={setNotification}
           players={players}
-          lostGame={lostGame}
-          setLostGame={setLostGame}
-          setUser={setUser}
-          socket={socket}
+          clickGameButton={clickGameButton}
+          playAgain={playAgain}
+          leaveGame={leaveGame}
         />
       ) : (
-        <NameForm setUser={setUser} socket={socket} />
+        <NameForm enterGame={enterGame} name={name} setName={setName} />
       )}
       <Footer></Footer>
     </Container>

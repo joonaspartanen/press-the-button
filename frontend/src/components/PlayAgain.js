@@ -2,20 +2,7 @@ import React from 'react'
 
 import { Grid, Header, Button } from 'semantic-ui-react'
 
-const PlayAgain = ({ socket, setLostGame, setNotification, setUser }) => {
-  const playAgain = () => {
-    socket.emit('playAgain')
-    setLostGame(false)
-    setNotification('Ready to play?')
-  }
-
-  const leaveGame = () => {
-    socket.emit('leaveGame')
-    setLostGame(false)
-    setNotification('Ready to play?')
-    setUser('')
-  }
-
+const PlayAgain = ({ playAgain, leaveGame }) => {
   return (
     <Grid verticalAlign='middle' textAlign='center' style={{ height: '100vh' }}>
       <Grid.Column>
@@ -27,13 +14,19 @@ const PlayAgain = ({ socket, setLostGame, setNotification, setUser }) => {
         </Header>
         <Button
           onClick={playAgain}
+          className='yes-button'
           color='green'
           size='huge'
           style={{ marginRight: '1em' }}
         >
           Yes
         </Button>
-        <Button onClick={leaveGame} color='red' size='huge'>
+        <Button
+          onClick={leaveGame}
+          className='no-button'
+          color='red'
+          size='huge'
+        >
           No
         </Button>
       </Grid.Column>
