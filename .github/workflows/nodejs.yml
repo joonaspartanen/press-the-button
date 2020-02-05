@@ -38,4 +38,4 @@ jobs:
           git config --global user.name "Joonas Partanen"
           git add .
           git commit -m "Build to Heroku"
-          git push heroku `git subtree split --prefix backend master`:master --force
+          git subtree push --prefix backend heroku master
