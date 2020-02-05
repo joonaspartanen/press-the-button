@@ -1,4 +1,4 @@
-name: Node CI
+name: CI
 
 on: [push]
 
@@ -12,9 +12,16 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - name: npm install and test
+    - name: npm install and test backend
       run: |
         cd backend
+        npm ci
+        npm test
+      env:
+        CI: true
+    - name: npm install and test frontend
+      run: |
+        cd ../frontend
         npm ci
         npm test
       env:
