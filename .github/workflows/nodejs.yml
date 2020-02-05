@@ -25,7 +25,7 @@ jobs:
           npm test
         env:
           CI: true
-      - name: build
+      - name: Build
         run: |
           cd backend
           rm -rf build && cd ../frontend && npm run build --prod && cp -r build ../backend/
@@ -38,4 +38,4 @@ jobs:
           git config --global user.name "Joonas Partanen"
           git add .
           git commit -m "Build to Heroku"
-          git subtree push -f --prefix backend heroku master
+          git subtree push --force --prefix backend heroku master
