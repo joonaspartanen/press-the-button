@@ -34,6 +34,7 @@ const App = () => {
     setLostGame(false)
     setNotification('Ready to play?')
     setUser('')
+    setName('')
   }
 
   const clickGameButton = () => {
@@ -65,8 +66,8 @@ const App = () => {
       {user ? (
         <GameView
           notification={notification}
-          setNotification={setNotification}
           players={players}
+          lostGame={lostGame}
           clickGameButton={clickGameButton}
           playAgain={playAgain}
           leaveGame={leaveGame}
