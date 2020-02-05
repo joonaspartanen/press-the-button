@@ -35,8 +35,8 @@ jobs:
       - name: Deploy to Heroku
         if: github.ref == 'refs/heads/master' && job.status == 'success'
         run: |
-        git config --global user.email "partanen.joonas@gmail.com"
-        git config --global user.name "Joonas Partanen"
-        git add .
-        git commit -m "Build to Heroku"
-        git subtree push --prefix backend heroku master
+          git config --global user.email "partanen.joonas@gmail.com"
+          git config --global user.name "Joonas Partanen"
+          git add .
+          git commit -m "Build to Heroku"
+          git subtree push --prefix backend heroku master
