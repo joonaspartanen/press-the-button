@@ -29,3 +29,11 @@ jobs:
         run: |
           cd backend
           rm -rf build && cd ../frontend && npm run build --prod && cp -r build ../backend/
+      - name: Add remote origin
+        run: |
+          git remote add heroku https://heroku:${{ secrets.HERO_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+      - name: Deploy to Heroku
+        run: |
+        git add .
+        git commit -m "Build to Heroku"
+        git subtree push --prefix backend heroku master
