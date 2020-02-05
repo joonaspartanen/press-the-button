@@ -25,7 +25,7 @@ describe('<NameForm />', () => {
 
   test('when the button is clicked, enterGame is called once', () => {
     fireEvent.click(button)
-    expect(enterGameMock.mock.calls.length).toBe(1)
+    expect(enterGameMock).toHaveBeenCalledTimes(1)
   })
 
 
