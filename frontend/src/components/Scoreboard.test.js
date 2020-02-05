@@ -8,7 +8,7 @@ afterEach(cleanup)
 test('Scoreboard contains all players', () => {
   const players = [
     { name: 'Tester', score: 16, id: '123a' },
-    { name: 'Tester2', score: 18, id: '123b'},
+    { name: 'Tester2', score: 18, id: '123b' },
     { name: 'Tester3', score: 20, id: '123c' }
   ]
 

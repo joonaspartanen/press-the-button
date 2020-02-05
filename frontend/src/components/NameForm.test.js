@@ -27,6 +27,4 @@ describe('<NameForm />', () => {
     fireEvent.click(button)
     expect(enterGameMock).toHaveBeenCalledTimes(1)
   })
-
-
 })

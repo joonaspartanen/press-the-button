@@ -14,12 +14,7 @@ const GameView = ({
   leaveGame
 }) => {
   if (lostGame) {
-    return (
-      <PlayAgain
-        playAgain={playAgain}
-        leaveGame={leaveGame}
-      />
-    )
+    return <PlayAgain playAgain={playAgain} leaveGame={leaveGame} />
   }
   return (
     <Grid textAlign='center' stackable>
