@@ -18,7 +18,7 @@ The backend is tested with [jest](https://jestjs.io/) and there are some E2E tes
 
 ## Prerequisites
 
-Make sure you have npm installed.
+Make sure you have npm and node installed.
 
 ## How to run
 
