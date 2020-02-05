@@ -33,10 +33,9 @@ jobs:
         run: |
           git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
       - name: Deploy to Heroku
-        if: github.ref == 'refs/heads/master' && job.status == 'success'
         run: |
           git config --global user.email "partanen.joonas@gmail.com"
           git config --global user.name "Joonas Partanen"
           git add .
           git commit -m "Build to Heroku"
-          git subtree push --prefix backend heroku master
+          git subtree push -f --prefix backend heroku master
