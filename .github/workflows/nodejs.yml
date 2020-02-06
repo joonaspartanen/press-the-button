@@ -32,10 +32,3 @@ jobs:
       - name: Add remote origin
         run: |
           git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-      - name: Deploy to Heroku
-        run: |
-          git config --global user.email "partanen.joonas@gmail.com"
-          git config --global user.name "Joonas Partanen"
-          git add .
-          git commit -m "Build to Heroku"
-          git subtree push --prefix backend heroku master
