@@ -36,4 +36,4 @@ jobs:
         run: |
           git config --global user.email "partanen.joonas@gmail.com"
           git config --global user.name "Joonas Partanen"
-          git subtree push --prefix=backend heroku origin:master
+          git subtree push --prefix=backend heroku origin/master:master
