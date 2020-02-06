@@ -72,7 +72,7 @@ There is a demo running on Heroku: [Press the Button](http://press-the-button-ga
 
 - The UI includes a scoreboard. This might not be wise as it allows the players to guess more easily when the counter hits the next prize. On the other hand, this leaves room for tactics and might make the game more interesting and interactive. Also, without the scoreboard, it wouldn't make much sense to use the socket.io for the project, and I wanted to take this opportunity to learn about a new technology.
 
-- TODO: Frontend tests with react-testing-library.
+- TODO: ~~Frontend tests with react-testing-library.~~
 
 - TODO: CD pipeline.
 
