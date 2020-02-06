@@ -1,4 +1,4 @@
-![Node CI](https://github.com/joonaspartanen/press-the-button/workflows/Node%20CI/badge.svg)
+![CI/CD](https://github.com/joonaspartanen/press-the-button/workflows/CI/CD/badge.svg)
 
 # Press the Button
 
@@ -77,4 +77,3 @@ There is a demo running on Heroku: [Press the Button](http://press-the-button-ga
 - TODO: CD pipeline.
 
 - TODO: Create Dockerfiles.
-
