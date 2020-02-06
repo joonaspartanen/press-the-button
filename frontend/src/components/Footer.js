@@ -11,7 +11,7 @@ const Footer = () => {
     >
       <Container>
         <Menu.Item header>
-          <Icon name='gavel' size='big' style={{ marginRight: '1.5em' }} />
+          <Icon name='gavel' size='large' style={{ marginRight: '1.5em' }} />
           Press the Button
         </Menu.Item>
         <Menu.Item
