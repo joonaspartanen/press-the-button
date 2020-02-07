@@ -74,6 +74,6 @@ There is a demo running on Heroku: [Press the Button](http://press-the-button-ga
 
 - TODO: ~~Frontend tests with react-testing-library.~~
 
-- TODO: CD pipeline.
+- TODO: CD pipeline (I'm testing this out to learn, but of course the tests should be completed first...)
 
 - TODO: Create Dockerfiles.
