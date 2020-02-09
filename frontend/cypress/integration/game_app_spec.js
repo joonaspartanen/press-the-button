@@ -20,25 +20,23 @@ describe('When button clicked', function() {
     cy.get('[data-cy=name-input]').type('Tester')
     cy.get('[data-cy=join-btn]').click()
     cy.contains('Press the Button!')
-    cy.get('[data-cy=game-btn]').click()
   })
 
   it('some notification is shown', function() {
+    cy.get('[data-cy=game-btn]').click()
     cy.get('[data-cy=notification]').should('exist')
   })
 
-  /* This test is still flaky...
   it('score is decremented by 1', function() {
     cy.get('[data-cy=score]').then($div => {
       const score1 = parseInt($div.text())
 
-      cy.get('[data-cy=game-btn]')
-        .click()
-        .then(() => {
-          const score2 = parseInt($div.text())
-          expect(score2).to.eq(score1 - 1)
-        })
+      cy.get('[data-cy=game-btn]').click()
+      cy.wait(500)
+      cy.get('[data-cy=score]').then(() => {
+        const score2 = parseInt($div.text())
+        expect(score2).to.eq(score1 - 1)
+      })
     })
   })
-  */
 })
