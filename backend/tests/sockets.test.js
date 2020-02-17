@@ -51,7 +51,6 @@ describe('The server handles socket events correctly', () => {
 
     test('new player starts with 20 points', done => {
       socket.on('gameState', data => {
-        console.log(data.players)
         expect(data.players[0].score).toBe(20)
         done()
       })
