@@ -7,13 +7,9 @@ const NameForm = ({ enterGame, name, setName }) => {
   }
 
   return (
-    <Grid
-      verticalAlign='middle'
-      textAlign='center'
-      style={{ height: 'calc(100vh - 50px)' }}
-    >
+    <Grid verticalAlign='middle' textAlign='center' style={{ height: '100vh' }}>
       <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as='h2' style={{ color: '#fff' }} textAlign='center'>
+        <Header as='h2' textAlign='center'>
           What's your name?
         </Header>
         <Form size='large' onSubmit={enterGame}>
@@ -25,8 +21,7 @@ const NameForm = ({ enterGame, name, setName }) => {
               required
               autoFocus
               className='name-input'
-              data-cy='name-input'
-            ></Form.Input>
+              data-cy='name-input'></Form.Input>
           </Form.Field>
           <Button
             type='submit'
@@ -34,8 +29,7 @@ const NameForm = ({ enterGame, name, setName }) => {
             size='large'
             color='green'
             className='join-btn'
-            data-cy='join-btn'
-          >
+            data-cy='join-btn'>
             Play!
           </Button>
         </Form>

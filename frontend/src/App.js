@@ -17,7 +17,6 @@ const App = () => {
   const [lostGame, setLostGame] = useState(false)
 
   const enterGame = event => {
-    console.log('click')
     event.preventDefault()
     socket.emit('newPlayer', name)
     setUser(name)
@@ -61,8 +60,7 @@ const App = () => {
       style={{
         backgroundColor: '#2a3950',
         minHeight: '100vh'
-      }}
-    >
+      }}>
       {user ? (
         <GameView
           notification={notification}

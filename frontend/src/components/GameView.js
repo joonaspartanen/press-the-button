@@ -5,17 +5,11 @@ import Notification from './Notification'
 import PlayAgain from './PlayAgain'
 import Scoreboard from './Scoreboard'
 
-const GameView = ({
-  notification,
-  players,
-  lostGame,
-  clickGameButton,
-  playAgain,
-  leaveGame
-}) => {
+const GameView = ({ notification, players, lostGame, clickGameButton, playAgain, leaveGame }) => {
   if (lostGame) {
     return <PlayAgain playAgain={playAgain} leaveGame={leaveGame} />
   }
+
   return (
     <Grid textAlign='center' stackable>
       <Grid.Row columns={1}>
@@ -23,12 +17,10 @@ const GameView = ({
           <Header
             as='h1'
             style={{
-              color: '#fff',
               fontSize: '300%',
               paddingTop: '5vw',
               marginBottom: '5vw'
-            }}
-          >
+            }}>
             Press the Button!
           </Header>
         </Grid.Column>
@@ -40,14 +32,10 @@ const GameView = ({
             color='red'
             className='game-btn'
             onClick={clickGameButton}
-          ></Button>
+            autoFocus></Button>
           <Notification notification={notification} />
         </Grid.Column>
-        <Grid.Column
-          textAlign='center'
-          width={6}
-          style={{ paddingRight: '8em' }}
-        >
+        <Grid.Column textAlign='center' width={6} style={{ paddingRight: '8em' }}>
           <Scoreboard players={players} />
         </Grid.Column>
       </Grid.Row>
