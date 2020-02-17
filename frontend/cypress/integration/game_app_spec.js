@@ -27,7 +27,7 @@ describe('When button clicked', function() {
     cy.get('[data-cy=notification]').should('exist')
   })
 
-  it('score is decremented by 1', function() {
+  it('score is decremented by 1 on first click', function() {
     cy.get('[data-cy=score]').then($div => {
       const score1 = parseInt($div.text())
 
@@ -39,4 +39,20 @@ describe('When button clicked', function() {
       })
     })
   })
+
+  it('after 10 click first prize yields 5 points', function() {
+    cy.get('[data-cy=score]').then($div => {
+      const score1 = parseInt($div.text())
+
+      for (int i = 0, i < 10, i++) {
+        cy.get('[data-cy=game-btn]').click()
+      }
+      cy.wait(500)
+      cy.get('[data-cy=score]').then(() => {
+        const score2 = parseInt($div.text())
+        expect(score2).to.eq(score1 - 1)
+      })
+    })
+  })
+
 })
