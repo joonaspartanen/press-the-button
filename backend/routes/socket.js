@@ -1,3 +1,5 @@
+let gameState = { counter: 0, nextPrize: 10, players: [] }
+
 const {
   addPlayer,
   resetPlayer,
@@ -8,29 +10,29 @@ const {
 
 const socketHandler = (io, socket) => {
   socket.on('newPlayer', name => {
-    addPlayer(socket, name)
-    sendGameState(io)
+    addPlayer(socket, name, gameState)
+    sendGameState(io, gameState)
   })
 
   socket.on('click', () => {
-    handleClick(io, socket)
-    sendGameState(io)
+    handleClick(io, socket, gameState)
+    sendGameState(io, gameState)
   })
 
   socket.on('playAgain', () => {
-    resetPlayer(socket)
-    sendGameState(io)
+    resetPlayer(socket, gameState)
+    sendGameState(io, gameState)
   })
 
   socket.on('leaveGame', () => {
     console.log('Leaving game...')
-    removePlayer(socket)
-    sendGameState(io)
+    removePlayer(socket, gameState)
+    sendGameState(io, gameState)
   })
 
   socket.on('disconnect', () => {
-    removePlayer(socket)
-    sendGameState(io)
+    removePlayer(socket, gameState)
+    sendGameState(io, gameState)
   })
 }
 
