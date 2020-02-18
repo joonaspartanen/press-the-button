@@ -14,7 +14,7 @@ The aim is to build a simple multiplayer game that is played by pressing a butto
 
 The backend is built with Node.js and Express. The frontend is made with React and uses Semantic UI React for styling. The application relies on [socket.io](https://socket.io/) for communication between the server and the client.
 
-The backend is tested with [jest](https://jestjs.io/) and there are some E2E tests with [Cypress](https://www.cypress.io/).
+The backend has unit and integration tests with [jest](https://jestjs.io/) and there are also some E2E tests with [Cypress](https://www.cypress.io/).
 
 ## Prerequisites
 
