@@ -4,7 +4,7 @@ import { Grid, Header, Button } from 'semantic-ui-react'
 
 const PlayAgain = ({ playAgain, leaveGame }) => {
   return (
-    <Grid verticalAlign='middle' textAlign='center' style={{ height: '100vh' }}>
+    <Grid verticalAlign='middle' textAlign='center' style={{ height: 'calc(100vh - 50px)' }}>
       <Grid.Column>
         <Header as='h1' style={{ paddingTop: '1em' }}>
           You lose!

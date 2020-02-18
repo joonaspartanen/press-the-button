@@ -7,7 +7,7 @@ const NameForm = ({ enterGame, name, setName }) => {
   }
 
   return (
-    <Grid verticalAlign='middle' textAlign='center' style={{ height: '100vh' }}>
+    <Grid verticalAlign='middle' textAlign='center' style={{ height: 'calc(100vh - 50px)' }}>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' textAlign='center'>
           What's your name?

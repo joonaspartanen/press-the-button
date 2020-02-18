@@ -11,7 +11,7 @@ const GameView = ({ notification, players, lostGame, clickGameButton, playAgain,
   }
 
   return (
-    <Grid textAlign='center' stackable>
+    <Grid textAlign='center' stackable style={{ height: 'calc(100vh - 50px)' }}>
       <Grid.Row columns={1}>
         <Grid.Column textAlign='center'>
           <Header
