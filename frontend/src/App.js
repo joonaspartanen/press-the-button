@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'semantic-ui-react'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import GameView from './components/GameView'
 import NameForm from './components/NameForm'
