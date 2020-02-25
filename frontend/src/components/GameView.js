@@ -11,31 +11,33 @@ const GameView = ({ notification, players, lostGame, clickGameButton, playAgain,
   }
 
   return (
-    <Grid textAlign='center' stackable style={{ height: 'calc(100vh - 50px)' }}>
+    <Grid textAlign='center' stackable style={{ minHeight: 'calc(100vh - 50px)' }}>
       <Grid.Row columns={1}>
-        <Grid.Column textAlign='center'>
+        <Grid.Column textAlign='center' verticalAlign='bottom' style={{ paddingBottom: '3em' }}>
           <Header
             as='h1'
             style={{
-              fontSize: '300%',
-              paddingTop: '5vw',
-              marginBottom: '5vw'
+              fontSize: '3em'
             }}>
             Press the Button!
           </Header>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row>
+      <Grid.Row style={{ paddingTop: '3em' }}>
         <Grid.Column width={10} textAlign='center'>
           <Button
             data-cy='game-btn'
             color='red'
             className='game-btn'
             onClick={clickGameButton}
-            autoFocus></Button>
+            autoFocus
+          />
           <Notification notification={notification} />
         </Grid.Column>
-        <Grid.Column textAlign='center' width={6} style={{ paddingRight: '8em' }}>
+        <Grid.Column
+          textAlign='center'
+          width={6}
+          style={{ paddingRight: '8em', paddingTop: '1em' }}>
           <Scoreboard players={players} />
         </Grid.Column>
       </Grid.Row>
