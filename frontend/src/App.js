@@ -72,7 +72,7 @@ const App = () => {
       ) : (
         <NameForm enterGame={enterGame} name={name} setName={setName} />
       )}
-      <Footer></Footer>
+      <Footer />
     </Container>
   )
 }
