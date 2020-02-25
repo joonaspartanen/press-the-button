@@ -32,9 +32,12 @@ const handleClick = (io, socket, gameState) => {
 
 const handleWin = (prize, socket, io, gameState) => {
   const player = findPlayer(socket.id, gameState)
-  gameState.nextPrize = gameState.nextPrize + 10
   io.to(player.id).emit('win', prize)
   updateScore(player, prize, gameState)
+}
+
+const calculateNextPrize = counter => {
+  return 10 - (counter % 10)
 }
 
 const aboutToLose = player => {
@@ -45,7 +48,7 @@ const handleLose = (socket, io, gameState) => {
   const player = findPlayer(socket.id, gameState)
   aboutToLose(player)
     ? io.to(player.id).emit('lostGame')
-    : io.to(player.id).emit('noWin', gameState.nextPrize - gameState.counter)
+    : io.to(player.id).emit('noWin', calculateNextPrize(gameState.counter))
   updateScore(player, 0, gameState)
 }
 
@@ -61,7 +64,7 @@ const sortPlayers = gameState => {
 const sendGameState = (io, gameState) => {
   io.sockets.emit('gameState', {
     players: gameState.players,
-    toNextPrize: gameState.nextPrize - gameState.counter
+    toNextPrize: calculateNextPrize(gameState.counter)
   })
 }
 
