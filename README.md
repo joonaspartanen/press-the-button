@@ -66,6 +66,8 @@ Now open `http://localhost:5000/` in your browser to use the application.
 
 There is a demo running on Heroku: [Press the Button](http://press-the-button-game.herokuapp.com/)
 
+![Game view screenshot](https://github.com/joonaspartanen/press-the-button/press-the-button.png)
+
 ## Comments and todos
 
 - Testing the sockets turned out to be rather complicated, and the test coverage is not yet wide enough.
@@ -77,3 +79,7 @@ There is a demo running on Heroku: [Press the Button](http://press-the-button-ga
 - TODO: CD pipeline (I'm testing this out to learn, but of course the tests should be completed first...)
 
 - TODO: Create Dockerfiles.
+
+- TODO: Player names should be validated (check if already in use, length restriction)
+
+- TODO: Scoreboard should display only a limited number of players.
