@@ -66,7 +66,7 @@ Now open `http://localhost:5000/` in your browser to use the application.
 
 There is a demo running on Heroku: [Press the Button](http://press-the-button-game.herokuapp.com/)
 
-![Game view screenshot](https://github.com/joonaspartanen/press-the-button/press-the-button.png)
+![Game view screenshot](https://github.com/joonaspartanen/press-the-button/blob/master/press-the-button.png)
 
 ## Comments and todos
 
