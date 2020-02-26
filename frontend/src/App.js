@@ -55,11 +55,7 @@ const App = () => {
   }, [players, lostGame])
 
   return (
-    <Container
-      style={{
-        backgroundColor: '#2a3950',
-        minHeight: '100vh'
-      }}>
+    <Container className='main-container'>
       {user ? (
         <GameView
           notification={notification}
