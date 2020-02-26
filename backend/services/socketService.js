@@ -63,8 +63,7 @@ const sortPlayers = gameState => {
 
 const sendGameState = (io, gameState) => {
   io.sockets.emit('gameState', {
-    players: gameState.players,
-    toNextPrize: calculateNextPrize(gameState.counter)
+    players: gameState.players
   })
 }
 
