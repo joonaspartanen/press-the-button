@@ -1,4 +1,4 @@
-let gameState = { counter: 0, nextPrize: 10, players: [] }
+let gameState = { counter: 0, players: [] }
 
 const {
   addPlayer,
