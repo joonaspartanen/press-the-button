@@ -83,3 +83,5 @@ There is a demo running on Heroku: [Press the Button](http://press-the-button-ga
 - TODO: Player names should be validated (check if already in use, length restriction)
 
 - TODO: Scoreboard should display only a limited number of players.
+
+-
