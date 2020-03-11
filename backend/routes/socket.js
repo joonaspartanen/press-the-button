@@ -1,5 +1,3 @@
-let gameState = { counter: 0, players: [] }
-
 const {
   addPlayer,
   resetPlayer,
@@ -7,6 +5,8 @@ const {
   sendGameState,
   handleClick
 } = require('../services/socketService')
+
+let gameState = { counter: 0, players: [] }
 
 const socketHandler = (io, socket) => {
   socket.on('newPlayer', name => {
