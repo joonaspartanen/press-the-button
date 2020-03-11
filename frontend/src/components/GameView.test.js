@@ -37,7 +37,7 @@ describe('<GameView />', () => {
     gameButton = component.container.querySelector('.game-btn')
   })
 
-  test('The game view is rendered correctly', () => {
+  test('is rendered correctly', () => {
     expect(component.container).toHaveTextContent('Press the Button!')
     expect(gameButton).toBeDefined()
   })

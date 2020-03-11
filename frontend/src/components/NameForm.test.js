@@ -17,7 +17,7 @@ beforeEach(() => {
 const enterGameMock = jest.fn()
 
 describe('<NameForm />', () => {
-  test('The name form is rendered correctly', () => {
+  test('is rendered correctly', () => {
     expect(component.container).toHaveTextContent("What's your name?")
     expect(button).toBeDefined()
     expect(input).toBeDefined()
