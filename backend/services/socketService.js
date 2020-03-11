@@ -46,9 +46,11 @@ const aboutToLose = player => {
 
 const handleLose = (socket, io, gameState) => {
   const player = findPlayer(socket.id, gameState)
-  aboutToLose(player)
-    ? io.to(player.id).emit('lostGame')
-    : io.to(player.id).emit('noWin', calculateNextPrize(gameState.counter))
+  if (aboutToLose(player)) {
+    io.to(player.id).emit('lostGame')
+  } else {
+    io.to(player.id).emit('noWin', calculateNextPrize(gameState.counter))
+  }
   updateScore(player, 0, gameState)
 }
 
